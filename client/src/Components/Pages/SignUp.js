@@ -39,6 +39,12 @@ const SignUp = () => {
       });
     }
   };
+  const handleGoogle = async () => {
+    api.error({
+      description: "Ingration Work Going On",
+      duration: 1
+    });
+  };
 
   return (
     <div className=" sign-card-container d-flex justify-content-center align-items-center vh-100 ">
@@ -90,7 +96,11 @@ const SignUp = () => {
               </>
               <>
                 <Button variant=" outline-secondary">
-                  <FcGoogle className=" fs-1 mt-3" />
+                  <FcGoogle
+                    className=" fs-1 mt-3"
+                    onClick={handleGoogle}
+                    style={{ cursor: "pointer" }}
+                  />
                 </Button>
               </>
             </span>

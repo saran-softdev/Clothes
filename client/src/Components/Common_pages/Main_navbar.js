@@ -162,10 +162,10 @@ const MainNavbar = () => {
                       <Nav.Link href="/kids">Kids</Nav.Link>
                     </Nav>
                     <Nav className="z-3">
-                      <Nav.Link onClick={handleFavoriteClick} className="z-3">
+                      {/* <Nav.Link onClick={handleFavoriteClick} className="z-3">
                         {contextHolder}
                         <AiOutlineHeart className="fs-4" />
-                      </Nav.Link>
+                      </Nav.Link> */}
                       <Nav.Link onClick={handleCartClick} className="z-3">
                         <Badge>
                           {contextHolder}

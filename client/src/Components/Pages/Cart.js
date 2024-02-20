@@ -8,6 +8,7 @@ import MainNavbar from "../Common_pages/Main_navbar";
 import "../Css_pages/Card.css";
 import { AiOutlineDelete, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import MainFooter from "../Common_pages/Main_footer";
+import { message, notification } from "antd";
 
 const Cart = () => {
   const count = useSelector((state) => state.count);
@@ -15,6 +16,8 @@ const Cart = () => {
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
   const [cartData, setCartData] = useState([]);
   const userId = localStorage.getItem("userId");
+  const [api, contextHolder] = notification.useNotification();
+  const [messageApi] = message.useMessage();
 
   useEffect(() => {
     if (userId) {
@@ -83,6 +86,12 @@ const Cart = () => {
     (total, item) => total + item.totalPrice,
     0
   );
+  const handleCheckout = async () => {
+    api.error({
+      description: "Ingration Work Going On",
+      duration: 1
+    });
+  };
 
   return (
     <div>
@@ -151,7 +160,9 @@ const Cart = () => {
                 <div className="d-flex flex-column w-100">
                   <Col className="d-flex justify-content-center align-items-center flex-column">
                     <h4>Total all cart Price: {totalCartPrice}</h4>
-                    <Button className="w-75">Checkout</Button>
+                    <Button className="w-75" onClick={handleCheckout}>
+                      Checkout
+                    </Button>
                   </Col>
                   <Col className="d-flex justify-content-center align-items-center mt-2">
                     <img
@@ -166,6 +177,7 @@ const Cart = () => {
             </div>
           </Col>
         </Row>
+        {contextHolder}
       </Container>
       <MainFooter />
     </div>

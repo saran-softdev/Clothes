@@ -5,7 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { message, notification } from "antd";
-import "../Css_pages/Card.css"; 
+import "../Css_pages/Card.css";
 
 const SignIn = () => {
   const BACKENDURL = process.env.REACT_APP_BACKEND_URL;
@@ -56,6 +56,12 @@ const SignIn = () => {
       });
     }
   };
+  const handleGoogle = async () => {
+    api.error({
+      description: "Ingration Work Going On",
+      duration: 1
+    });
+  };
 
   return (
     <div className="sign-card-container vh-100 d-flex justify-content-center align-items-center">
@@ -95,7 +101,11 @@ const SignIn = () => {
                 Sign In
               </Button>
               <p className="mt-4">or</p>
-              <FcGoogle className="fs-1 mt-3" />
+              <FcGoogle
+                className="fs-1 mt-3"
+                onClick={handleGoogle}
+                style={{ cursor: "pointer" }}
+              />
             </span>
           </Form>
         </span>

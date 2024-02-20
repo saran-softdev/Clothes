@@ -4,12 +4,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import MainNavbar from "../Common_pages/Main_navbar";
 import Carousel from "react-bootstrap/Carousel";
 import "../Css_pages/Shopping_cart.css";
-import axios from "axios";
 import Flickity from "flickity";
 import "flickity/css/flickity.css";
 import Card from "react-bootstrap/Card";
-
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import MainFooter from "../Common_pages/Main_footer";
 
 const Home = () => {
@@ -35,12 +32,26 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <MainNavbar /> {/* Corrected component name */}
+    <div className=" p-0 m-0">
+      <MainNavbar />
       <Container>
         {/* Carousel */}
+        <Row className=" my-2">
+          <img
+            src="/home/banner.webp"
+            alt=""
+            srcset=""
+            className=" img-fluid p-0"
+          />
+        </Row>
+
         <Row>
-          <Carousel activeIndex={index} onSelect={handleSelect}>
+          <Carousel
+            activeIndex={index}
+            onSelect={handleSelect}
+            controls={false}
+            className="custom-carousel p-0"
+          >
             <Carousel.Item>
               <img
                 src="https://lmsin.net/cdn-cgi/image/w=1232,q=70,fit=cover/https://b37db184fa09e5ba0292-662caecad9dd967cd19824f80fb1538c.lmsin.net/MAX-Friday/MAX2.O/MAX-Uber-HP-Desktop-HeroBanner4-22JAN24.png"
@@ -52,7 +63,6 @@ const Home = () => {
                 src="https://lmsin.net/cdn-cgi/image/w=1232,q=70,fit=cover/https://b37db184fa09e5ba0292-662caecad9dd967cd19824f80fb1538c.lmsin.net/MAX-Friday/MAX2.O/MAX-Uber-HP-Desktop-HeroBanner2-24JAN24A.png"
                 alt=""
               />
-              <Carousel.Caption></Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
               <img
@@ -68,26 +78,23 @@ const Home = () => {
             </Carousel.Item>
           </Carousel>
         </Row>
-        <Row className=" mt-3">
-          <img
-            src="https://img.freepik.com/free-vector/happy-diwali-purple-shiny-sale-banner_1017-21635.jpg?w=1380&t=st=1707407677~exp=1707408277~hmac=f01e03c138a80396a6a37f51fc6a4c93e30991548b7734454e89119a41c2afdb"
-            className="img-fluid"
-            alt=""
-          />
-        </Row>
+
         <Row>
-          <div className=" text-center mt-5 fs-5 text-danger">
-            <h1>HOT DEALS!</h1>
+          <div className=" text-center my-2 fs-5 text-danger">
+            <h1 className=" p-0 m-0">
+              {" "}
+              <b>HOT DEALS!</b>{" "}
+            </h1>
           </div>
-          <div className="card_carousal mt-3">
-            <div ref={carouselRef} className="main-carousel">
+          <div className="card_carousal mt-3 ">
+            <div ref={carouselRef} className="main-carousel p-0">
               <div className="carousel-cell">
                 <span className=" d-flex justify-content-center align-items-center">
                   <img src="/home/slide1.jpg" className="m-0 p-3 w-75" />
                 </span>
               </div>
               <div className="carousel-cell">
-                <img src="/home/slide2.jpg" className="m-0 p-3" />
+                <img src="/home/slide2.jpg" className="m-0 p-3  " />
               </div>
               <div className="carousel-cell">
                 <img src="/home/slide3.jpg" className="m-0 p-3" />
@@ -111,17 +118,13 @@ const Home = () => {
               <div className="carousel-cell">
                 <img src="/home/slider8.jpg" className="m-0 p-3" />
               </div>
-              <div className="carousel-cell">
-                <span className=" d-flex justify-content-center align-items-center">
-                  <img src="/home/slide14.jpg" className="m-0 p-3 w-75" />
-                </span>
-              </div>
             </div>
           </div>
         </Row>
+
         {/* Bg-Image */}
-        <Row className=" mt-3">
-          <section className="img1">
+        <Row>
+          <section className="img1 my-3">
             <div className="txt_position">
               <span className="txt_style">
                 <p>NEW COLLECTION</p>
@@ -133,15 +136,8 @@ const Home = () => {
               </span>
             </div>
           </section>
-          <section className="parah_container">
-            <p>
-              Step into a world of timeless sophistication with the Timeless
-              Elegance Midi Dress. This dress effortlessly marries classic charm
-              with modern flair, making it a wardrobe staple for any occasion.
-            </p>
-          </section>
         </Row>
-        <Row className="mt-3">
+        <Row>
           <Col xs={12} sm={6} md={4} lg={3} className=" my-3">
             <Card style={{ width: "100%" }}>
               <a
@@ -199,29 +195,50 @@ const Home = () => {
             </Card>
           </Col>
         </Row>
+        <Row className=" my-3 ">
+          <img
+            src="https://img.freepik.com/free-vector/happy-diwali-purple-shiny-sale-banner_1017-21635.jpg?w=1380&t=st=1707407677~exp=1707408277~hmac=f01e03c138a80396a6a37f51fc6a4c93e30991548b7734454e89119a41c2afdb"
+            className="img-fluid p-0"
+            alt=""
+          />
+        </Row>
+        <Row>
+          <section className=" img2">
+            <div className="txt_position">
+              <span className="txt_style">
+                <p>DISCOVER THE LATEST</p>
+                <h2>EXPRESS YOUR STYLE WITH CONFIDENCE</h2>
+                <h4>FIND YOUR PERFECT LOOK</h4>
+                <a href="/women" class="btn41-43 btn-41 mt-3">
+                  VIEW COLLECTION
+                </a>
+              </span>
+            </div>
+          </section>
+        </Row>
         <Row>
           <img
             src="../v-offer.jpg"
             alt=""
             srcset=""
-            className=" img-fluid my-5"
+            className=" img-fluid my-3 p-0"
           />
         </Row>
         <Row>
           <Col>
-            <img src="/home/gl2.jpg" className=" img-fluid" alt="" srcset="" />
+            <img src="/home/gl2.jpg" className=" img-fluid " alt="" srcset="" />
           </Col>
           <Col>
             <img
               src="/home/slide12.jpg"
-              className=" img-fluid"
+              className=" img-fluid "
               alt=""
               srcset=""
             />
           </Col>
         </Row>
         <Row className="svg_container">
-          <article class="wrapper">
+          <article class="wrapper ">
             <div class="marquee">
               <div class="marquee__group">
                 <svg>
@@ -338,6 +355,7 @@ const Home = () => {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 192.756 192.756"
+              width={100}
               id="Timberland"
             >
               <g
@@ -371,6 +389,7 @@ const Home = () => {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 192.756 192.756"
+              width={100}
               id="Champion"
             >
               <g
@@ -404,6 +423,7 @@ const Home = () => {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 192.756 192.756"
+              width={100}
               id="Pelle"
             >
               <g
@@ -442,6 +462,7 @@ const Home = () => {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="6.797 10.88 618.977 209.32"
+              width={100}
               id="Fila"
             >
               <path
@@ -458,6 +479,7 @@ const Home = () => {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 192.756 192.756"
+              width={100}
               id="Puma"
             >
               <path
@@ -479,6 +501,7 @@ const Home = () => {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 192.756 192.756"
+              width={100}
               id="Nike"
             >
               <g
@@ -517,6 +540,7 @@ const Home = () => {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 192.756 192.756"
+              width={100}
               id="Levis"
             >
               <g
@@ -555,6 +579,7 @@ const Home = () => {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 192.756 192.756"
+              width={100}
               id="Lee"
             >
               <g

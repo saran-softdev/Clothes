@@ -4,9 +4,13 @@ import axios from "axios";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { message, notification } from "antd";
+import "../Css_pages/Card.css"; 
 
 const SignIn = () => {
   const BACKENDURL = process.env.REACT_APP_BACKEND_URL;
+  const [api, contextHolder] = notification.useNotification();
+  const [messageApi] = message.useMessage();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -23,27 +27,47 @@ const SignIn = () => {
     e.preventDefault();
     try {
       const data = await axios.post(`${BACKENDURL}/login`, formData);
-      const { token } = data.data; // Assuming the token is returned in the response data
+      const { token } = data.data;
       const decodedToken = jwtDecode(token);
-      const userId = decodedToken._id; // Assuming the user ID is stored in the _id field of the token payload
-      console.log("Decoded User ID:", userId);
+      const token_exp = decodedToken.exp;
+      const userId = decodedToken._id;
+      const userName = decodedToken.username;
+      localStorage.setItem("userName", userName);
+      const expirationDate = new Date(token_exp * 1000);
+      const hours = expirationDate.getHours();
+      const minutes = expirationDate.getMinutes();
+      const ampm = hours >= 12 ? "PM" : "AM";
+      const formattedHours = hours % 12 || 12;
+      const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+      const formattedExpirationTime = `${formattedHours}:${formattedMinutes} ${ampm}`;
+      localStorage.setItem("token_exp", formattedExpirationTime);
       localStorage.setItem("userId", userId);
-      alert("User logged in successfully!");
-      navigate("/");
+      api.success({
+        description: "Successfully LogIn",
+        duration: 1
+      });
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     } catch (error) {
-      console.error("Error logging in:", error);
-      alert("Error logging in. Please try again.");
+      api.error({
+        description: "Please Check Details",
+        duration: 1
+      });
     }
   };
 
   return (
-    <div className=" d-flex justify-content-center align-items-center vh-100 ">
+    <div className="sign-card-container vh-100 d-flex justify-content-center align-items-center">
       <Container>
-        <span className=" d-flex justify-content-center align-items-center flex-column">
-          <h1>Sign In</h1>
+        <span className="d-flex justify-content-center align-items-center flex-column sign-card ">
+          {/* <h1>Company Name</h1>  */}
+          <h2 className="mb-4">Sign In</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formUsername">
-              <Form.Label>Username</Form.Label>
+              <Form.Label>
+                <h4>Username</h4>
+              </Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter username"
@@ -54,7 +78,9 @@ const SignIn = () => {
               />
             </Form.Group>
             <Form.Group controlId="formPassword">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>
+                <h4>Password</h4>
+              </Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Password"
@@ -64,23 +90,16 @@ const SignIn = () => {
                 required
               />
             </Form.Group>
-            <span className=" d-flex justify-content-center align-items-center gap-5">
-              <>
-                <Button variant="primary" type="submit" className=" mt-3">
-                  Sign In
-                </Button>
-              </>
-              <>
-                <p className=" mt-4">or</p>
-              </>
-              <>
-                <Button variant=" outline-secondary">
-                  <FcGoogle className=" fs-1 mt-3" />
-                </Button>
-              </>
+            <span className="d-flex justify-content-center align-items-center gap-5">
+              <Button variant="primary" type="submit" className="mt-3">
+                Sign In
+              </Button>
+              <p className="mt-4">or</p>
+              <FcGoogle className="fs-1 mt-3" />
             </span>
           </Form>
         </span>
+        {contextHolder}
       </Container>
     </div>
   );

@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Breadcrumb } from "react-bootstrap";
 import { AiOutlineHeart, AiOutlineShopping } from "react-icons/ai";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../Redux/ReduxCartData/CartDataAction";
 import axios from "axios";
 import MainFooter from "../Common_pages/Main_footer";
+import MainNavbar from "../Common_pages/Main_navbar";
+import { Button, message, notification } from "antd";
+import "../Css_pages/Card.css";
 
 const Men = () => {
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
   const [index, setIndex] = useState(0);
   const [cardProductData, setCardProductData] = useState([]);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [api, contextHolder] = notification.useNotification();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetchdata();
@@ -42,9 +49,27 @@ const Men = () => {
     }
     return description;
   };
-
+  // Function to add item to cart
+  const handleAddToCart = (item) => {
+    const userId = localStorage.getItem("userId"); // Assuming userId is stored in localStorage upon login
+    if (userId) {
+      // User is logged in, allow adding to cart
+      dispatch(addToCart(item));
+      api.success({
+        description: "Item added to cart.",
+        duration: 2
+      });
+    } else {
+      // User is not logged in, display alert message
+      api.error({
+        description: "Please LogIn to Add Items To Cart.",
+        duration: 2
+      });
+    }
+  };
   return (
     <div>
+      <MainNavbar />
       <Container>
         <Row className="p-3 p-md-5">
           {" "}
@@ -60,7 +85,7 @@ const Men = () => {
         </Row>
         <Row className="card_container">
           {WomenProduct.map((cardProduct) => (
-            <Col xs={12} md={6} lg={4} key={cardProduct.id} className=" my-3">
+            <Col xs={12} md={6} lg={4} key={cardProduct.id} className=" my-5">
               {/* Adjust column size for different screen sizes */}
               <div className="card___container">
                 <button className="card__love-btn">
@@ -87,7 +112,10 @@ const Men = () => {
                     )}
                   </p>
                   <div className="card__footer">
-                    <button className="card_btn">
+                    <button
+                      className="card_btn"
+                      onClick={() => handleAddToCart(cardProduct)}
+                    >
                       <AiOutlineShopping />
                       Add to cart
                     </button>
@@ -98,6 +126,7 @@ const Men = () => {
             </Col>
           ))}
         </Row>
+        {contextHolder}
       </Container>
       <MainFooter />
     </div>

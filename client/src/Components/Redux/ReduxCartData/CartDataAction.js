@@ -5,17 +5,23 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export const addToCart = (product) => {
   const productId = product._id;
+  // console.log(product);
 
   return async (dispatch) => {
     try {
-      await axios.post(`${BACKEND_URL}/cart/add`, {
+      const response = await axios.post(`${BACKEND_URL}/cart/add`, {
         productId: productId,
         userId: localStorage.getItem("userId")
       });
-      dispatch({
-        type: types.ADD_TO_CART,
-        payload: product
-      });
+      // console.log(response);
+
+      if (response.status === 200) {
+        dispatch({
+          type: types.ADD_TO_CART,
+          payload: product
+        });
+      }
+      return response;
     } catch (error) {
       console.log(error);
     }
@@ -23,9 +29,11 @@ export const addToCart = (product) => {
 };
 
 export const removeFromCart = (productId) => {
+  const userId = localStorage.getItem("userId");
+
   return async (dispatch) => {
     try {
-      await axios.delete(`${BACKEND_URL}/cart/remove/${productId}`);
+      await axios.delete(`${BACKEND_URL}/remove/${userId}/${productId}`);
       dispatch({
         type: types.REMOVE_FROM_CART,
         payload: productId
@@ -35,22 +43,3 @@ export const removeFromCart = (productId) => {
     }
   };
 };
-
-export const updateQuantity = (productId, quantity) => {
-  return async (dispatch) => {
-    try {
-      await axios.put(`${BACKEND_URL}/cart/update/${productId}`, { quantity });
-      dispatch({
-        type: types.UPDATE_QUANTITY,
-        payload: { productId, quantity }
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const placeOrder = (orderData) => ({
-  type: types.PLACE_ORDER,
-  payload: orderData
-});

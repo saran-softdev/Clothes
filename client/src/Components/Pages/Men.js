@@ -1,19 +1,22 @@
-// Men.js
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Breadcrumb } from "react-bootstrap";
 import { AiOutlineHeart, AiOutlineShopping } from "react-icons/ai";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart } from "../Redux/ReduxCartData/CartDataAction";
 import axios from "axios";
 import MainFooter from "../Common_pages/Main_footer";
+import { Button, message, notification } from "antd";
+import MainNavbar from "../Common_pages/Main_navbar";
+import "../Css_pages/Card.css";
 
 const Men = () => {
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
   const [index, setIndex] = useState(0);
   const [cardProductData, setCardProductData] = useState([]);
   const [isExpanded, setIsExpanded] = useState(false);
-  // const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
+  const [api, contextHolder] = notification.useNotification();
+  const [messageApi] = message.useMessage();
 
   useEffect(() => {
     fetchdata();
@@ -49,15 +52,31 @@ const Men = () => {
   };
 
   // Function to add item to cart
-  const handleAddToCart = (item) => {
-    dispatch(addToCart(item));
+  const handleAddToCart = async (item) => {
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      // User is logged in, allow adding to cart
+      // const response =
+      await dispatch(addToCart(item)); // Dispatch addToCart action to update cart response in Redux store
+      // if (response.data.message === "Item added to cart successfully") {
+      api.success({
+        description: "Item added to cart.",
+        duration: 2
+      });
+      // }
+    } else {
+      api.error({
+        description: "Please LogIn to Add Items To Cart.",
+        duration: 2
+      });
+    }
   };
+
   return (
     <div>
+      <MainNavbar />
       <Container>
         <Row className="p-3 p-md-5">
-          {" "}
-          {/* Adjust padding for smaller screens */}
           <Breadcrumb>
             <Breadcrumb.Item href="/">HOME</Breadcrumb.Item>
             <Breadcrumb.Item active>MEN</Breadcrumb.Item>
@@ -69,8 +88,7 @@ const Men = () => {
         </Row>
         <Row className="card_container">
           {WomenProduct.map((cardProduct) => (
-            <Col xs={12} md={6} lg={4} key={cardProduct.id} className=" my-3">
-              {/* Adjust column size for different screen sizes */}
+            <Col xs={12} md={6} lg={4} key={cardProduct.id} className=" my-5">
               <div className="card___container">
                 <button
                   className="card__love-btn"
@@ -113,6 +131,7 @@ const Men = () => {
             </Col>
           ))}
         </Row>
+        {contextHolder}
       </Container>
       <MainFooter />
     </div>

@@ -123,8 +123,29 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-image: url("http://localhost:3000/home/bg2.jpg");
-  min-height: 100vh;
+  min-height: 80vh;
 }
+
+.img2 {
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-image: url("http://localhost:3000/home/gl3.jpg");
+  min-height: calc(100vh - 163px) !important;
+}
+
+.img2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Adjust the opacity as needed */
+}
+
 .txt_position {
   position: absolute;
   top: 50%;
@@ -132,18 +153,37 @@
   text-align: center;
   color: white;
   font-size: 27px;
+  transform: translateY(-50%); /* Center vertically */
 }
 
 .txt_style {
   padding: 20px;
 }
+
 .parah_container {
-  padding: 50px 80px;
+  padding: 50px 20px; /* Adjust padding for smaller screens */
   text-align: center;
-  padding: 50px 80px;
-  text-align: center;
-  /* background-color: #f4f4f4; */
   color: #666;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .img1,
+  .img2 {
+    min-height: 50vh; /* Adjust the minimum height for smaller screens */
+  }
+
+  .txt_position {
+    font-size: 20px; /* Adjust font size for smaller screens */
+  }
+
+  .txt_style {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .parah_container {
+    padding: 30px 10px; /* Adjust padding for smaller screens */
+  }
 }
 
 .btn41-43 {
@@ -270,18 +310,18 @@ a {
   /* --color-bg: papayawhip; */
   /* --color-bg-accent: #ecdcc0; */
   --size: clamp(10rem, 1rem + 40vmin, 30rem);
-  --gap: calc(var(--size) / 14);
+  --gap: calc(var(--size) / 20);
   --duration: 60s;
   --scroll-start: 0;
   --scroll-end: calc(-100% - var(--gap));
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    /* --color-text: papayawhip;
-    --color-bg: navy; */
-    /* --color-bg-accent: rgb(132, 132, 138); */
-  }
+  /* :root {
+    --color-text: papayawhip;
+    --color-bg: navy;
+    --color-bg-accent: rgb(132, 132, 138);
+  } */
 }
 
 * {
@@ -321,7 +361,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  /* gap: var(--gap); */
+  gap: var(--gap);
   min-width: 100%;
   animation: scroll-x var(--duration) linear infinite;
 }
@@ -376,7 +416,7 @@ a {
   fill: var(--color-text);
   background: var(--color-bg-accent);
   aspect-ratio: 16/9;
-  padding: calc(var(--size) / 10);
+  padding: calc(var(--size) / 30);
   border-radius: 0.5rem;
 }
 
@@ -548,3 +588,30 @@ a {
 .card___container:hover .card__footer {
   background-color: #f8f9fa; /* Change to your desired hover background color */
 }
+
+.custom-carousel .carousel-indicators {
+  bottom: -20px; /* Adjust this value as needed */
+}
+
+/* CSS to style the scrollbar */
+/* Width and height of the scrollbar */
+::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+/* Color and styling of the scrollbar track */
+::-webkit-scrollbar-track {
+  background: transparent; /* Background color of the track */
+}
+
+/* Color and styling of the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(10, 10, 10, 0.852); /* Color of the thumb */
+ border-radius: 3px;
+}
+
+/* Handle when scrollbar is hovered */
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(0, 0, 248); /* Darker color when hovered */
+}
+

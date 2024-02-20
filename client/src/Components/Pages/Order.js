@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Divider, Steps } from "antd";
+import MainNavbar from "../Common_pages/Main_navbar";
 
 const App = () => {
   const [statusData, setStatusData] = useState([]);
@@ -18,6 +19,7 @@ const App = () => {
 
   return (
     <>
+      <MainNavbar />
       <Steps
         progressDot
         current={1}

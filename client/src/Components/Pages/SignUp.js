@@ -3,9 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { FcGoogle } from "react-icons/fc";
+import { message, notification } from "antd";
+import "../Css_pages/Card.css";
 
 const SignUp = () => {
   const BACKENDURL = process.env.REACT_APP_BACKEND_URL;
+  const [api, contextHolder] = notification.useNotification();
+  const [messageApi] = message.useMessage();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -21,18 +25,25 @@ const SignUp = () => {
     e.preventDefault();
     try {
       await axios.post(`${BACKENDURL}/register`, formData);
-      navigate("/signin");
-      alert("User registered successfully!");
+      api.success({
+        description: "User registered successfully!",
+        duration: 1
+      });
+      setTimeout(() => {
+        navigate("/signin");
+      }, 1000);
     } catch (error) {
-      console.error("Error registering user:", error);
-      alert("Error registering user. Please try again.");
+      api.error({
+        description: "User already registered.",
+        duration: 1
+      });
     }
   };
 
   return (
-    <div className=" d-flex justify-content-center align-items-center vh-100 ">
+    <div className=" sign-card-container d-flex justify-content-center align-items-center vh-100 ">
       <Container>
-        <span className=" d-flex justify-content-center align-items-center flex-column">
+        <span className=" d-flex justify-content-center align-items-center flex-column sign-card">
           <h1>Sign Up</h1>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formUsername">
@@ -85,6 +96,7 @@ const SignUp = () => {
             </span>
           </Form>
         </span>
+        {contextHolder}
       </Container>
     </div>
   );

@@ -1,4 +1,6 @@
-import { Routes, Route, Router } from "react-router-dom";
+// App.js
+import React, { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import Adminpg from "./Components/Pages/Admin";
 import Home from "./Components/Pages/Home";
 import SignIn from "./Components/Pages/SignIn";
@@ -8,9 +10,19 @@ import Women from "./Components/Pages/Women";
 import About from "./Components/Pages/About";
 import Contact from "./Components/Pages/Contact";
 import Kids from "./Components/Pages/Kids";
+import Cart from "./Components/Pages/Cart";
+import Favorite from "./Components/Pages/Favorite";
+import MainNavbar from "./Components/Common_pages/Main_navbar";
+
 function App() {
+  // useEffect(() => {
+  //   localStorage.removeItem("cartState");
+  // }, []);
+
   return (
     <div className="App">
+      {/* <MainNavbar /> */}
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/men" element={<Men />} />
@@ -20,6 +32,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/favorite" element={<Favorite />} />
         <Route path="/admin/add-update" element={<Adminpg />} />
         <Route path="*" element={<Home />} />
       </Routes>

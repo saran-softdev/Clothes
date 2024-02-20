@@ -66,23 +66,21 @@ const Adminpg = () => {
     }
   };
 
-  const onDelete = (id) => {
-    axios
-      .delete(`${BACKEND_URL}/product-delete/${id}`)
-      .then(() => {
-        setProductData(productData.filter((product) => product._id !== id));
-        messageApi.open({
-          type: "success",
-          content: "Product deleted successfully"
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-        messageApi.open({
-          type: "error",
-          content: error
-        });
+  const onDelete = async (id) => {
+    try {
+      await axios.delete(`${BACKEND_URL}/deletedata/${id}`);
+      setProductData(productData.filter((product) => product._id !== id));
+      messageApi.open({
+        type: "success",
+        content: "Product deleted successfully"
       });
+    } catch (error) {
+      console.error(error);
+      messageApi.open({
+        type: "error",
+        content: error.message
+      });
+    }
   };
 
   const handleEditClick = (id) => {

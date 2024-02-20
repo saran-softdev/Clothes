@@ -1,13 +1,11 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import "../Css_pages/footer.css";
-import { FaFacebook } from "react-icons/fa";
-import { AiOutlineInstagram } from "react-icons/ai";
-import { AiOutlineTwitter } from "react-icons/ai";
 
 const MainFooter = () => {
   return (
-    <div>
+    <>
       <Container fluid>
         <Row>
           <footer className="footer">
@@ -59,19 +57,13 @@ const MainFooter = () => {
                   <h4>follow us</h4>
                   <div className="social-links">
                     <a href="#">
-                      <i className="fab fa-facebook-f">
-                        <FaFacebook />
-                      </i>
+                      <FaFacebook />
                     </a>
                     <a href="#">
-                      <i className="fab fa-twitter">
-                        <AiOutlineTwitter />
-                      </i>
+                      <FaTwitter />
                     </a>
                     <a href="#">
-                      <i className="fab fa-instagram">
-                        <AiOutlineInstagram />
-                      </i>
+                      <FaInstagram />
                     </a>
                   </div>
                 </Col>
@@ -79,12 +71,13 @@ const MainFooter = () => {
             </Container>
           </footer>
         </Row>
-        <Row></Row>
+        <Row>
+          <p className="text-center text-white bg-black p-4 m-0">
+            Copyright © 2023 DESIGN SHOE | Powered by DESIGN SHOE
+          </p>
+        </Row>
       </Container>
-      <p className=" text-center text-white bg-black p-4  m-0">
-        Copyright © 2023 DESIGN SHOE | Powered by DESIGN SHOE
-      </p>
-    </div>
+    </>
   );
 };
 

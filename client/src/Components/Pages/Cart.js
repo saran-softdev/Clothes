@@ -150,7 +150,7 @@ const Cart = () => {
               <Row>
                 <div className="d-flex flex-column w-100">
                   <Col className="d-flex justify-content-center align-items-center flex-column">
-                    <h4>Total all cart Price: {totalCartPrice}</h4>{" "}
+                    <h4>Total all cart Price: {totalCartPrice}</h4>
                     <Button className="w-75">Checkout</Button>
                   </Col>
                   <Col className="d-flex justify-content-center align-items-center mt-2">

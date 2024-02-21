@@ -13,11 +13,17 @@ import Kids from "./Components/Pages/Kids";
 import Cart from "./Components/Pages/Cart";
 import Favorite from "./Components/Pages/Favorite";
 import MainNavbar from "./Components/Common_pages/Main_navbar";
+import { useSelector, useDispatch } from "react-redux";
+import { jwtDecode } from "jwt-decode";
+import { userRefresh } from "./Components/Redux/ReduxCartData/CartDataAction";
 
 function App() {
-  // useEffect(() => {
-  //   localStorage.removeItem("cartState");
-  // }, []);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state);
+  console.log("Redux Data", user);
+  useEffect(() => {
+    dispatch(userRefresh());
+  }, []);
 
   return (
     <div className="App">

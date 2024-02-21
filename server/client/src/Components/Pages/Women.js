@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Breadcrumb } from "react-bootstrap";
 import { AiOutlineHeart, AiOutlineShopping } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart } from "../Redux/ReduxCartData/CartDataAction";
+import { addToCart, userRefresh } from "../Redux/ReduxCartData/CartDataAction";
 import axios from "axios";
 import MainFooter from "../Common_pages/Main_footer";
 import MainNavbar from "../Common_pages/Main_navbar";
 import { Button, message, notification } from "antd";
+
 import "../Css_pages/Card.css";
 
 const Men = () => {
@@ -16,6 +17,7 @@ const Men = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [api, contextHolder] = notification.useNotification();
   const dispatch = useDispatch();
+  const [messageApi] = message.useMessage();
 
   useEffect(() => {
     fetchdata();
@@ -50,17 +52,29 @@ const Men = () => {
     return description;
   };
   // Function to add item to cart
-  const handleAddToCart = (item) => {
-    const userId = localStorage.getItem("userId"); // Assuming userId is stored in localStorage upon login
+  const handleAddToCart = async (item) => {
+    const userId = localStorage.getItem("userId");
     if (userId) {
-      // User is logged in, allow adding to cart
-      dispatch(addToCart(item));
-      api.success({
-        description: "Item added to cart.",
-        duration: 2
-      });
+      const response = await dispatch(addToCart(item));
+      if (response.status === 200) {
+        dispatch(userRefresh());
+        api.success({
+          description: "Item added to cart.",
+          duration: 2
+        });
+      } else if (response.status === 400) {
+        // Handle specific error status code
+        api.error({
+          description: "Item already added in the cart.",
+          duration: 2
+        });
+      } else {
+        api.error({
+          description: "Failed to add item to cart.",
+          duration: 2
+        });
+      }
     } else {
-      // User is not logged in, display alert message
       api.error({
         description: "Please LogIn to Add Items To Cart.",
         duration: 2

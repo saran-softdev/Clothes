@@ -2,16 +2,22 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart } from "../Redux/ReduxCartData/CartDataAction";
+import {
+  removeFromCart,
+  userRefresh
+} from "../Redux/ReduxCartData/CartDataAction";
 import { decrementCount } from "../Redux/ReduxBatchData/BatchDataAction";
 import MainNavbar from "../Common_pages/Main_navbar";
 import "../Css_pages/Card.css";
 import { AiOutlineDelete, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import MainFooter from "../Common_pages/Main_footer";
 import { message, notification } from "antd";
+import { BiBasket } from "react-icons/bi";
 
 const Cart = () => {
-  const count = useSelector((state) => state.count);
+  const count = useSelector((state) =>
+    state.cartData.userData ? state.cartData.userData.cart.length : 0
+  );
   const dispatch = useDispatch();
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
   const [cartData, setCartData] = useState([]);
@@ -41,13 +47,20 @@ const Cart = () => {
     }
   };
 
-  const handleRemoveFromCart = (productId) => {
+  const handleRemoveFromCart = async (productId) => {
     // Optimistically remove item from UI
     setCartData((prevCartData) =>
       prevCartData.filter((item) => item.productId._id !== productId)
     );
-    // Send remove action to Redux
-    dispatch(removeFromCart(productId));
+    const response = await dispatch(removeFromCart(productId));
+    console.log(response);
+    if (response.status === 200) {
+      dispatch(userRefresh());
+      api.success({
+        description: "Cart Item Deleted.",
+        duration: 2
+      });
+    }
     dispatch(decrementCount(productId));
   };
 
@@ -152,19 +165,20 @@ const Cart = () => {
           <Col xs={12} lg={6}>
             <div className="TotalCart_Items">
               <Row>
-                <Col>
-                  <p>Total items in cart: {count}</p>
-                </Col>
-              </Row>
-              <Row>
-                <div className="d-flex flex-column w-100">
+                <div className="d-flex flex-column w-100 mt-5">
                   <Col className="d-flex justify-content-center align-items-center flex-column">
-                    <h4>Total all cart Price: {totalCartPrice}</h4>
-                    <Button className="w-75" onClick={handleCheckout}>
-                      Checkout
+                    <h1>Total items in cart: {count}</h1>
+                    <h4 className=" mt-4">
+                      Total cart Price: ₹{totalCartPrice}
+                    </h4>
+                    <Button className="w-75 mt-4" onClick={handleCheckout}>
+                      <div className=" d-flex justify-content-center align-items-center gap-2">
+                        Checkout
+                        <BiBasket className=" fs-4" />
+                      </div>
                     </Button>
                   </Col>
-                  <Col className="d-flex justify-content-center align-items-center mt-2">
+                  <Col className="d-flex justify-content-center align-items-center mt-4">
                     <img
                       src="https://static.vecteezy.com/system/resources/previews/019/080/436/large_2x/popular-online-payment-methods-logo-with-white-background-transparent-with-logotype-gateway-icon-set-for-website-free-vector.jpg"
                       alt=""

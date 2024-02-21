@@ -6,8 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { message, notification } from "antd";
 import "../Css_pages/Card.css";
+import { useDispatch } from "react-redux";
+import { userAction } from "../Redux/ReduxCartData/CartDataAction";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
   const BACKENDURL = process.env.REACT_APP_BACKEND_URL;
   const [api, contextHolder] = notification.useNotification();
   const [messageApi] = message.useMessage();
@@ -28,6 +31,9 @@ const SignIn = () => {
     try {
       const data = await axios.post(`${BACKENDURL}/login`, formData);
       const { token } = data.data;
+      localStorage.setItem("token", token);
+      console.log(data);
+      dispatch(userAction(data.data.user));
       const decodedToken = jwtDecode(token);
       const token_exp = decodedToken.exp;
       const userId = decodedToken._id;

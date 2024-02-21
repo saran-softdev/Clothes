@@ -15,12 +15,22 @@ import { Button, notification } from "antd";
 import { Badge } from "antd";
 import { useSelector } from "react-redux";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { useDispatch } from "react-redux";
+import { userRefresh } from "../Redux/ReduxCartData/CartDataAction";
 
 const MainNavbar = () => {
   const jwtToken = localStorage.getItem("userId");
   const jwtExpToken = localStorage.getItem("token_exp");
   const userId = localStorage.getItem("userId");
-  const count = useSelector((state) => state.cartData.cartItems.length);
+  const dispatch = useDispatch();
+
+  // const count = useSelector((state) => state.cartData.cartItems.length);
+  // const countAction = useSelector((state) => state.cartData);
+  const count = useSelector((state) =>
+    state.cartData.userData ? state.cartData.userData.cart.length : 0
+  );
+
+  // console.log(countAction);
 
   const navigate = useNavigate();
 
@@ -29,6 +39,7 @@ const MainNavbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("userId");
     localStorage.removeItem("token_exp");
+    dispatch(userRefresh());
     api.success({
       description: "Successfully LogOut",
       duration: 1
@@ -152,6 +163,13 @@ const MainNavbar = () => {
                     <Offcanvas.Title
                       id={`offcanvasNavbarLabel-expand-${expand}`}
                     >
+                      <img
+                        src="../Designer.png"
+                        alt=""
+                        srcSet=""
+                        width={100}
+                        className=" p-0 m-0"
+                      />
                       Designer | Shoe
                     </Offcanvas.Title>
                   </Offcanvas.Header>
@@ -167,7 +185,7 @@ const MainNavbar = () => {
                         <AiOutlineHeart className="fs-4" />
                       </Nav.Link> */}
                       <Nav.Link onClick={handleCartClick} className="z-3">
-                        <Badge>
+                        <Badge count={count}>
                           {contextHolder}
                           <BiCartAlt className="fs-4" />
                         </Badge>

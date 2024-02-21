@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Breadcrumb } from "react-bootstrap";
 import { AiOutlineHeart, AiOutlineShopping } from "react-icons/ai";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../Redux/ReduxCartData/CartDataAction";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart, userRefresh } from "../Redux/ReduxCartData/CartDataAction";
 import axios from "axios";
 import MainFooter from "../Common_pages/Main_footer";
 import { Button, message, notification } from "antd";
@@ -55,15 +55,25 @@ const Men = () => {
   const handleAddToCart = async (item) => {
     const userId = localStorage.getItem("userId");
     if (userId) {
-      // User is logged in, allow adding to cart
-      // const response =
-      await dispatch(addToCart(item)); // Dispatch addToCart action to update cart response in Redux store
-      // if (response.data.message === "Item added to cart successfully") {
-      api.success({
-        description: "Item added to cart.",
-        duration: 2
-      });
-      // }
+      const response = await dispatch(addToCart(item));
+      if (response.status === 200) {
+        dispatch(userRefresh());
+        api.success({
+          description: "Item added to cart.",
+          duration: 2
+        });
+      } else if (response.status === 400) {
+        // Handle specific error status code
+        api.error({
+          description: "Item already added in the cart.",
+          duration: 2
+        });
+      } else {
+        api.error({
+          description: "Failed to add item to cart.",
+          duration: 2
+        });
+      }
     } else {
       api.error({
         description: "Please LogIn to Add Items To Cart.",
@@ -88,7 +98,7 @@ const Men = () => {
         </Row>
         <Row className="card_container">
           {WomenProduct.map((cardProduct) => (
-            <Col xs={12} md={6} lg={4} key={cardProduct.id} className=" my-5">
+            <Col xs={12} md={6} lg={4} key={cardProduct._id} className=" my-5">
               <div className="card___container">
                 <button
                   className="card__love-btn"

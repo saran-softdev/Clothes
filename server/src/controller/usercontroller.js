@@ -134,7 +134,7 @@ router.post("/login", async (req, res) => {
         const token = jwt.sign(userData, jwtSecretKey, {
           expiresIn: "1h"
         });
-        res.json({ token });
+        res.json({ token, user });
       } else {
         res.status(401).send("INVALID CREDENTIALS");
       }
@@ -155,6 +155,21 @@ router.get("/cart-get/:id", async (req, res) => {
       model: "Product" // Assuming your product model is named "Product"
     });
     res.json(singleUserData.cart);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.get("/get/user/:id", async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const singleUserData = await User.findById(userId);
+    res.send({
+      success: true,
+      message: "Data Recived Success",
+      userData: singleUserData
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

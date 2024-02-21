@@ -86,8 +86,8 @@ const Home = () => {
               <b>HOT DEALS!</b>{" "}
             </h1>
           </div>
-          <div className="card_carousal mt-3 ">
-            <div ref={carouselRef} className="main-carousel p-0">
+          <div className="card_carousal mt-3 d-flex flex-column justify-content-center align-items-center">
+            <div ref={carouselRef} className="main-carousel p-0 w-75 ">
               <div className="carousel-cell">
                 <span className=" d-flex justify-content-center align-items-center">
                   <img src="/home/slide1.jpg" className="m-0 p-3 w-75" />
@@ -123,9 +123,8 @@ const Home = () => {
         </Row>
 
         {/* Bg-Image */}
-        <Row>
+        {/* <Row>
           <section className="img1 my-3">
-            <img src="/home/bg2.jpg" alt="" srcset="" />
             <div className="txt_position">
               <span className="txt_style">
                 <p>NEW COLLECTION</p>
@@ -137,10 +136,16 @@ const Home = () => {
               </span>
             </div>
           </section>
-        </Row>
+        </Row> */}
         <Row>
-          <Col xs={12} sm={6} md={4} lg={3} className=" my-3">
-            <Card style={{ width: "100%" }}>
+          <Col
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            className=" my-3 d-flex flex-column justify-content-center align-items-center"
+          >
+            <Card style={{ width: "70%" }}>
               <a
                 href="/men"
                 style={{ textDecoration: "none", color: "inherit" }}
@@ -153,8 +158,14 @@ const Home = () => {
               </a>
             </Card>
           </Col>
-          <Col xs={12} sm={6} md={4} lg={3} className=" my-3">
-            <Card style={{ width: "100%" }}>
+          <Col
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            className=" my-3 d-flex flex-column justify-content-center align-items-center"
+          >
+            <Card style={{ width: "70%" }}>
               <a
                 href="/men"
                 style={{ textDecoration: "none", color: "inherit" }}
@@ -167,8 +178,14 @@ const Home = () => {
               </a>
             </Card>
           </Col>
-          <Col xs={12} sm={6} md={4} lg={3} className=" my-3">
-            <Card style={{ width: "100%" }}>
+          <Col
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            className=" my-3 d-flex flex-column justify-content-center align-items-center"
+          >
+            <Card style={{ width: "70%" }}>
               <a
                 href="/women"
                 style={{ textDecoration: "none", color: "inherit" }}
@@ -181,8 +198,14 @@ const Home = () => {
               </a>
             </Card>
           </Col>
-          <Col xs={12} sm={6} md={4} lg={3} className=" my-3">
-            <Card style={{ width: "100%" }}>
+          <Col
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            className=" my-3 d-flex flex-column justify-content-center align-items-center"
+          >
+            <Card style={{ width: "70%" }}>
               <a
                 href="/women"
                 style={{ textDecoration: "none", color: "inherit" }}
@@ -203,10 +226,9 @@ const Home = () => {
             alt=""
           />
         </Row>
-        <Row>
+        {/* <Row>
           <section className=" img2">
             <div className="txt_position">
-              <img src="/home/gl3.jpg" alt="" srcset="" />
               <span className="txt_style">
                 <p>DISCOVER THE LATEST</p>
                 <h2>EXPRESS YOUR STYLE WITH CONFIDENCE</h2>
@@ -217,7 +239,7 @@ const Home = () => {
               </span>
             </div>
           </section>
-        </Row>
+        </Row> */}
         <Row>
           <img
             src="../v-offer.jpg"

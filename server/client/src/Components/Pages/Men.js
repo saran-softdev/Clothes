@@ -96,9 +96,15 @@ const Men = () => {
           <h1 className="text-center">MEN'S COLLECTION</h1>
           <hr />
         </Row>
-        <Row className="card_container">
+        <Row>
           {WomenProduct.map((cardProduct) => (
-            <Col xs={12} md={6} lg={4} key={cardProduct._id} className=" my-5">
+            <Col
+              xs={12}
+              md={6}
+              lg={4}
+              key={cardProduct._id}
+              className=" my-5 d-flex flex-column justify-content-center align-items-center"
+            >
               <div className="card___container">
                 <button
                   className="card__love-btn"

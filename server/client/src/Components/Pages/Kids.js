@@ -99,7 +99,13 @@ const Kids = () => {
         </Row>
         <Row className="card_container">
           {WomenProduct.map((cardProduct) => (
-            <Col xs={12} md={6} lg={4} key={cardProduct.id} className=" my-5">
+            <Col
+              xs={12}
+              md={6}
+              lg={4}
+              key={cardProduct.id}
+              className=" my-5 d-flex flex-column justify-content-center align-items-center"
+            >
               {/* Adjust column size for different screen sizes */}
               <div className="card___container">
                 <button className="card__love-btn">

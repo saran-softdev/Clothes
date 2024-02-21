@@ -125,6 +125,7 @@ const Home = () => {
         {/* Bg-Image */}
         <Row>
           <section className="img1 my-3">
+            <img src="/home/bg2.jpg" alt="" srcset="" />
             <div className="txt_position">
               <span className="txt_style">
                 <p>NEW COLLECTION</p>
@@ -205,6 +206,7 @@ const Home = () => {
         <Row>
           <section className=" img2">
             <div className="txt_position">
+              <img src="/home/gl3.jpg" alt="" srcset="" />
               <span className="txt_style">
                 <p>DISCOVER THE LATEST</p>
                 <h2>EXPRESS YOUR STYLE WITH CONFIDENCE</h2>

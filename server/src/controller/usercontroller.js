@@ -43,7 +43,7 @@ const addToCart = async (userId, productId) => {
   }
 };
 
-router.post("/cart/add", async (req, res) => {
+router.post("cart/add", async (req, res) => {
   try {
     const { productId, userId } = req.body;
 
@@ -82,7 +82,7 @@ const removeFromCart = async (userId, productId) => {
 
 const jwtSecretKey = generateRandomKey();
 
-router.post("/register", async (req, res) => {
+router.post("register", async (req, res) => {
   try {
     const { username, email, password } = req.body; // Make sure to include 'email' here
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -96,7 +96,7 @@ router.post("/register", async (req, res) => {
 });
 
 // Remove item from cart
-router.delete("/remove/:userId/:productId", async (req, res) => {
+router.delete("remove/:userId/:productId", async (req, res) => {
   try {
     const productId = req.params.productId;
     const userId = req.params.userId;
@@ -113,7 +113,7 @@ router.delete("/remove/:userId/:productId", async (req, res) => {
 });
 // module.exports = router;
 
-router.post("/login", async (req, res) => {
+router.post("login", async (req, res) => {
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
@@ -147,7 +147,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/cart-get/:id", async (req, res) => {
+router.get("cart-get/:id", async (req, res) => {
   try {
     const userId = req.params.id;
     const singleUserData = await User.findById(userId).populate({
@@ -161,7 +161,7 @@ router.get("/cart-get/:id", async (req, res) => {
   }
 });
 
-router.get("/get/user/:id", async (req, res) => {
+router.get("get/user/:id", async (req, res) => {
   try {
     const userId = req.params.id;
     const singleUserData = await User.findById(userId);
@@ -176,7 +176,7 @@ router.get("/get/user/:id", async (req, res) => {
   }
 });
 
-router.put("/cart/update/:userId/:productId", async (req, res) => {
+router.put("cart/update/:userId/:productId", async (req, res) => {
   const { userId, productId } = req.params;
   const { quantity } = req.body;
 

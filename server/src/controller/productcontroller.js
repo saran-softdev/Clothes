@@ -2,7 +2,7 @@ const router = require("express").Router();
 const productDataModel = require("../model/product.model");
 
 // GET ALL PRODUCT DATA
-router.get("/product-get", async (req, res) => {
+router.get("product-get", async (req, res) => {
   try {
     const products = await productDataModel.find();
     res.send(products);
@@ -12,7 +12,7 @@ router.get("/product-get", async (req, res) => {
 });
 
 // POST PRODUCT DATA
-router.post("/product-post", async (req, res) => {
+router.post("product-post", async (req, res) => {
   const {
     productName,
     productId,
@@ -40,7 +40,7 @@ router.post("/product-post", async (req, res) => {
 });
 
 // GET UNIQUE PRODUCT DATA
-router.get("/api/products/:Id", async (req, res) => {
+router.get("api/products/:Id", async (req, res) => {
   try {
     const product = await productDataModel.findById(req.params.productId);
     if (product) {
@@ -53,7 +53,7 @@ router.get("/api/products/:Id", async (req, res) => {
   }
 });
 // PRODUCT UPDATE DATA
-router.put("/product-update/:id", async (req, res) => {
+router.put("product-update/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const {
@@ -93,7 +93,7 @@ router.put("/product-update/:id", async (req, res) => {
 
 // PRODUCT DELETE DATA
 
-router.delete("/product-delete/:id", async (req, res) => {
+router.delete("product-delete/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const deletedProduct = await productDataModel.findByIdAndDelete(id);
@@ -109,7 +109,7 @@ router.delete("/product-delete/:id", async (req, res) => {
 
 // UNIQUE CATEGORIES
 
-router.get("/uniqueCategories/men", async (req, res) => {
+router.get("uniqueCategories/men", async (req, res) => {
   try {
     const uniqueCategories = await productDataModel.distinct("category", {
       category: "men"

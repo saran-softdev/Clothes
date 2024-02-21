@@ -17,7 +17,7 @@ app.use(
     origin: [
       "http://localhost:5000",
       "http://localhost:3000",
-      "https://cloths-saran.koyeb.app"
+      "https://cloths-saran.koyeb.app/"
     ],
     credentials: true
   })

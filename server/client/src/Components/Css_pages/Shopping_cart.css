@@ -122,7 +122,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-image: url("http://localhost:5000/home/bg2.jpg");
+  background-image: url("https://cloths-saran.koyeb.app/home/bg2.jpg");
   min-height: 80vh;
 }
 
@@ -132,7 +132,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-image: url("http://localhost:5000/home/gl3.jpg");
+  background-image: url("https://cloths-saran.koyeb.app/home/gl3.jpg");
   min-height: calc(100vh - 163px) !important;
 }
 

@@ -25,7 +25,7 @@ app.use(
 // BODY-PARSER
 app.use(bodyParser.json());
 // PORT
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
 
 app.use("/", userController);
 app.use("/", productController);

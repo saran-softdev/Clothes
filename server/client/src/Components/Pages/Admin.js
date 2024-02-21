@@ -28,7 +28,7 @@ const Adminpg = () => {
 
   const getProducts = async () => {
     try {
-      const response = await axios.get(`${BACKEND_URL}product-get`);
+      const response = await axios.get(`${BACKEND_URL}/product-get`);
       setProductData(response.data);
       console.log(response.data);
     } catch (error) {
@@ -47,7 +47,7 @@ const Adminpg = () => {
       stock
     };
     try {
-      await axios.put(`${BACKEND_URL}product-update/${id}`, data);
+      await axios.put(`${BACKEND_URL}/product-update/${id}`, data);
       console.log("Data Updated");
       getProducts();
       setIsEditing(false);
@@ -68,7 +68,7 @@ const Adminpg = () => {
 
   const onDelete = async (id) => {
     try {
-      await axios.delete(`${BACKEND_URL}deletedata/${id}`);
+      await axios.delete(`${BACKEND_URL}/deletedata/${id}`);
       setProductData(productData.filter((product) => product._id !== id));
       messageApi.open({
         type: "success",
@@ -120,7 +120,7 @@ const Adminpg = () => {
         stock
       };
       try {
-        await axios.post(`${BACKEND_URL}product-post`, data);
+        await axios.post(`${BACKEND_URL}/product-post`, data);
         console.log("Data Submitted Successfully");
         setFormError("");
         clearForm();

@@ -33,7 +33,7 @@ const Cart = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${BACKEND_URL}cart-get/${userId}`);
+      const response = await axios.get(`${BACKEND_URL}/cart-get/${userId}`);
       const filteredCartData = response.data.filter((item) => item.productId); // Filter out items without productId
       // Initialize quantity property to 1 for each item
       const cartItemsWithQuantity = filteredCartData.map((item) => ({

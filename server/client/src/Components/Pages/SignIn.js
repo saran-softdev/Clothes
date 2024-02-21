@@ -57,7 +57,7 @@ const SignIn = () => {
       }, 1000);
     } catch (error) {
       api.error({
-        description: "Please Check Details",
+        description: "Internal Server Error",
         duration: 1
       });
     }

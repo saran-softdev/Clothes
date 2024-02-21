@@ -29,7 +29,7 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await axios.post(`${BACKENDURL}/login`, formData);
+      const data = await axios.post(`${BACKENDURL}login`, formData);
       const { token } = data.data;
       localStorage.setItem("token", token);
       console.log(data);

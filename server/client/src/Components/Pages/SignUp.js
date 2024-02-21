@@ -24,7 +24,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${BACKENDURL}/register`, formData);
+      await axios.post(`${BACKENDURL}register`, formData);
       api.success({
         description: "User registered successfully!",
         duration: 1

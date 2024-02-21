@@ -24,7 +24,7 @@ const Kids = () => {
 
   const fetchdata = async () => {
     try {
-      const response = await axios.get(`${BACKEND_URL}/product-get`);
+      const response = await axios.get(`${BACKEND_URL}product-get`);
       setCardProductData(response.data);
     } catch (error) {
       console.log(error);

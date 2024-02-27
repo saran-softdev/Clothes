@@ -68,7 +68,7 @@ const Adminpg = () => {
 
   const onDelete = async (id) => {
     try {
-      await axios.delete(`${BACKEND_URL}/deletedata/${id}`);
+      await axios.delete(`${BACKEND_URL}/product-delete/${id}`);
       setProductData(productData.filter((product) => product._id !== id));
       messageApi.open({
         type: "success",

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Breadcrumb } from "react-bootstrap";
 import { AiOutlineHeart, AiOutlineShopping } from "react-icons/ai";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart, userRefresh } from "../Redux/ReduxCartData/CartDataAction";
 import axios from "axios";
 import MainFooter from "../Common_pages/Main_footer";
-import { Button, message, notification } from "antd";
+import { message, notification } from "antd";
 import MainNavbar from "../Common_pages/Main_navbar";
 import "../Css_pages/Card.css";
 
